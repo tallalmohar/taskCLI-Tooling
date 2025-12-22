@@ -6,12 +6,18 @@ public class Main {
     // returns connected string from a String[] for task description
     public static StringBuilder getString(String[] strings){
         StringBuilder result = new StringBuilder();
+        int counter = 0;
         for(String string : strings){
-            result.append(string).append(" ");
+            result.append(string);
+            counter++;
+            if(counter < strings.length){
+                result.append(" ");
+            }
         }
         return result;
     }
 
+    // helper function
     public static boolean isInteger(String str){
         try{
             int taskID = Integer.parseInt(str);
@@ -24,6 +30,7 @@ public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         Operations op = new Operations();
+
 
 
         while(true){
@@ -40,22 +47,25 @@ public class Main {
             }else{
                 taskString = getString(Arrays.copyOfRange(userInputARRAY,1,userInputARRAY.length));
             }
+
             switch(userInputARRAY[0].toLowerCase()){
                 case "add":
                     //makes a task and then adds to the taskArray list
                     op.addToTaskArrayList(op.makeTask(taskString,Status.TODO));
-                    op.printTaskList();
+
                     break;
 
                 case "delete":
                     op.deleteTaskFromArrayList(taskInt);
-                    op.printTaskList();
+
                     break;
 
                 case "update":
                     op.updateTaskFromArrayList(taskInt,taskString);
-                    op.printTaskList();
+
                     break;
+
+                case "save":
             }
 
         }

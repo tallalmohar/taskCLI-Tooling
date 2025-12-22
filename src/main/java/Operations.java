@@ -1,9 +1,12 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.jar.JarEntry;
 
 public class Operations {
     //A Cache before adding to JSON File
     private ArrayList<Task> taskArrayList = new ArrayList<>();
+
+    JsonHandler jsonHandler = new JsonHandler();
 
 
     public Task makeTask(StringBuilder taskString, Status status){
@@ -18,6 +21,8 @@ public class Operations {
         }
         taskArrayList.add(taskToAdd);
         System.out.println("Task added successfully (ID: " + taskToAdd.getID() + ")");
+        jsonHandler.saveToFile(taskArrayList);
+
     }
 
 
@@ -26,6 +31,8 @@ public class Operations {
         for(Task task : taskArrayList){
             if(task.getID() == uuid) {
                 taskArrayList.remove(task);
+                System.out.println("Task " + task.getID() + ": Deleted!");
+                jsonHandler.saveToFile(taskArrayList);
                 return;
             }
         }
@@ -61,7 +68,7 @@ public class Operations {
         private LocalDateTime updatedAt;
 
         // private constructor
-        private Task(StringBuilder taskDescription, Status status){
+       protected Task(StringBuilder taskDescription, Status status){
             this.ID = this.counter+1;
             counter++;
             this.description = taskDescription;
