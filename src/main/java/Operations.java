@@ -15,22 +15,33 @@ public class Operations {
     public void addToTaskArrayList(Task taskToAdd){
         if (taskToAdd == null) {
             System.err.println("Error: Can't append NULL to taskArrayList!");
-            return;
         }
         taskArrayList.add(taskToAdd);
+        System.out.println("Task added successfully (ID: " + taskToAdd.getID() + ")");
     }
 
 
     // delete from array list
     public void deleteTaskFromArrayList(int uuid){
         for(Task task : taskArrayList){
-            if(task.getID() == uuid){
+            if(task.getID() == uuid) {
                 taskArrayList.remove(task);
                 return;
-            }else{
-                System.err.println("Error: ID doesn't exist!");
             }
         }
+        System.err.println("Error: ID doesn't exist!");
+    }
+
+    // update a task
+    public void updateTaskFromArrayList(int id, StringBuilder updatedDescription){
+        for(Task task : taskArrayList){
+            if(task.getID() == id) {
+                task.description = updatedDescription;
+                System.out.println("Task " + task.getID() + ": updated.");
+                return;
+            }
+        }
+        System.err.println("Error: ID doesn't exist!");
     }
 
     public void printTaskList(){

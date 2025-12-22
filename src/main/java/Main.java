@@ -53,7 +53,8 @@ public class Main {
                     break;
 
                 case "update":
-                    System.out.println("update");
+                    op.updateTaskFromArrayList(taskInt,taskString);
+                    op.printTaskList();
                     break;
             }
 
