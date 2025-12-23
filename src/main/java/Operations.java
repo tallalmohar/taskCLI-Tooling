@@ -45,6 +45,7 @@ public class Operations {
             if(task.getID() == id) {
                 task.description = updatedDescription;
                 System.out.println("Task " + task.getID() + ": updated.");
+                jsonHandler.saveToFile(taskArrayList);
                 return;
             }
         }
