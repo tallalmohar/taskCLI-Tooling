@@ -37,7 +37,8 @@ public class Main {
             String userInput = sc.nextLine();
 
             if(userInput.equalsIgnoreCase("exit"))break; // Exit clause for white loop
-            String[] userInputARRAY= userInput.split(" "); //raw string arr
+            String[] userInputARRAY= userInput.split(" ");//raw string arr
+
             // this gets us the task string description
             StringBuilder taskString;
             int taskInt = 0;
@@ -62,10 +63,15 @@ public class Main {
 
                 case "update":
                     op.updateTaskFromArrayList(taskInt,taskString);
-
                     break;
 
-                case "save":
+                case "mark-done":
+                    op.updateStatus(taskInt,Status.DONE);
+                    break;
+
+                case "mark-in-progress":
+                    op.updateStatus(taskInt,Status.IN_PROGRESS);
+                    break;
             }
 
         }

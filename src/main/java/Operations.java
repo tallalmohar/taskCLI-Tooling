@@ -4,7 +4,7 @@ import java.util.jar.JarEntry;
 
 public class Operations {
     //A Cache before adding to JSON File
-    private ArrayList<Task> taskArrayList = new ArrayList<>();
+    private final ArrayList<Task> taskArrayList = new ArrayList<>();
 
     JsonHandler jsonHandler = new JsonHandler();
 
@@ -20,11 +20,25 @@ public class Operations {
             System.err.println("Error: Can't append NULL to taskArrayList!");
         }
         taskArrayList.add(taskToAdd);
-        System.out.println("Task added successfully (ID: " + taskToAdd.getID() + ")");
-        jsonHandler.saveToFile(taskArrayList);
-
+        try{
+            System.out.println("Task added successfully (ID: " + taskToAdd.getID() + ")");
+            jsonHandler.saveToFile(taskArrayList);
+        } catch (NullPointerException e){
+            System.err.println("Error: .getID() on taskToAdd returned a NULLPOINTEREXCEPTION");
+        }
     }
 
+    public void updateStatus(int taskID, Status status){
+        for(Task task : taskArrayList){
+            if(task.getID() == taskID){
+                task.setStatus(status);
+                System.out.println("Task Status Updated!");
+                return;
+            }else{
+                System.err.println("Error: Task with ID " + taskID + " doesn't exist");
+            }
+        }
+    }
 
     // delete from array list
     public void deleteTaskFromArrayList(int uuid){
@@ -75,6 +89,10 @@ public class Operations {
             this.description = taskDescription;
             this.status = status;
             this.createdAt = LocalDateTime.now();
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
         }
 
         public int getID() {
