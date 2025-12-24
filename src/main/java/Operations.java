@@ -1,3 +1,4 @@
+import javax.swing.text.SimpleAttributeSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.jar.JarEntry;
@@ -12,7 +13,28 @@ public class Operations {
     public Task makeTask(StringBuilder taskString, Status status){
         return new Task(taskString,status);
     }
-
+    // List task's based on different statuses
+    public void listDone(){
+        for(Task task : taskArrayList){
+            if(task.status == Status.DONE) {
+                System.out.println(task.toString() + ",");
+            }
+        }
+    }
+    public void listTodo(){
+        for(Task task : taskArrayList){
+            if(task.status == Status.TODO) {
+                System.out.println(task.toString() + ",");
+            }
+        }
+    }
+    public void listInProgress(){
+        for(Task task : taskArrayList){
+            if(task.status == Status.IN_PROGRESS) {
+                System.out.println(task.toString() + ",");
+            }
+        }
+    }
 
     // add to arraylist
     public void addToTaskArrayList(Task taskToAdd){
@@ -28,16 +50,18 @@ public class Operations {
         }
     }
 
+    // update STATUS of the task - DONE,IN-PROGRES,TODO (todo get assigned automatically
+    // when TASK is instantiated
     public void updateStatus(int taskID, Status status){
         for(Task task : taskArrayList){
             if(task.getID() == taskID){
                 task.setStatus(status);
                 System.out.println("Task Status Updated!");
+                jsonHandler.saveToFile(taskArrayList);
                 return;
-            }else{
-                System.err.println("Error: Task with ID " + taskID + " doesn't exist");
             }
         }
+        System.err.println("Error: Task with ID " + taskID + " doesn't exist");
     }
 
     // delete from array list

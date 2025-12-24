@@ -19,7 +19,7 @@ public class JsonHandler {
         try(FileWriter fr = new FileWriter(filePath)){
             gson.toJson(taskArrayList,fr);
         }catch (IOException e){
-            e.printStackTrace();
+            System.err.println("Error: filePath Issue within FileWriter \"fr\"");
         }
     }
 }
