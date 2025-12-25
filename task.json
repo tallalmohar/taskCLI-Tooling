@@ -1,14 +1,8 @@
 [
   {
-    "ID": 3,
-    "description": "go to gym",
+    "ID": 1,
+    "description": "buy milk",
     "status": "TODO",
-    "createdAt": "2025-12-24T20:29:48.072681"
-  },
-  {
-    "ID": 4,
-    "description": "buy soup",
-    "status": "TODO",
-    "createdAt": "2025-12-24T20:30:07.798443"
+    "createdAt": "2025-12-24T20:45:27.807156"
   }
 ]
