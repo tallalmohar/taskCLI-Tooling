@@ -1,6 +1,7 @@
 import javax.swing.text.SimpleAttributeSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.jar.JarEntry;
 
 public class Operations {
@@ -9,10 +10,21 @@ public class Operations {
 
     JsonHandler jsonHandler = new JsonHandler();
 
+    public Operations(){
+        jsonHandler.loadFile(taskArrayList);
+        int maxId = 0;
+        for(Task task : taskArrayList){
+            if(task.getID() > maxId){
+                maxId = task.getID();
+            }
+        }
+        Task.setCounter(maxId);
+    }
 
     public Task makeTask(StringBuilder taskString, Status status){
         return new Task(taskString,status);
     }
+
     // List task's based on different statuses
     public void listDone(){
         for(Task task : taskArrayList){
@@ -115,12 +127,20 @@ public class Operations {
             this.createdAt = LocalDateTime.now();
         }
 
+        public static int getCounter() {
+            return counter;
+        }
+
         public void setStatus(Status status) {
             this.status = status;
         }
 
         public int getID() {
             return ID;
+        }
+
+        public static void setCounter(int counter) {
+            Task.counter = counter;
         }
 
         public StringBuilder getDescription() {

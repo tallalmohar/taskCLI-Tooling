@@ -31,7 +31,44 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Operations op = new Operations();
 
+        switch(args[0]){
+            case "add":
+                //makes a task and then adds to the taskArray list
+                op.addToTaskArrayList(op.makeTask(args[1], Status.TODO));
 
+                break;
+
+            case "delete":
+                op.deleteTaskFromArrayList(taskInt);
+
+                break;
+
+            case "update":
+                op.updateTaskFromArrayList(taskInt, taskString);
+                break;
+
+            case "mark-done":
+                op.updateStatus(taskInt, Status.DONE);
+                break;
+
+            case "mark-in-progress":
+                op.updateStatus(taskInt, Status.IN_PROGRESS);
+                break;
+
+            case "list":
+                if (userInputARRAY[1].equalsIgnoreCase("done")) {
+                    op.listDone();
+                } else if (userInputARRAY[1].equalsIgnoreCase("todo")) {
+                    op.listTodo();
+                } else if (userInputARRAY[1].equalsIgnoreCase("in-progress")) {
+                    op.listInProgress();
+                } else {
+                    System.err.println("Error: Enter a valid status to list! (done,todo,in-progress)");
+                }
+                break;
+
+        }
+        /*
         while (true) {
             String userInput = sc.nextLine();
 
@@ -92,7 +129,7 @@ public class Main {
                 System.err.println("Error: Enter Valid Value");
             }
 
-
         }
+        */
     }
 }
